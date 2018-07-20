@@ -1,0 +1,42 @@
+<% user=User.find_by_username(@temp) %>
+<div class="container3" style="margin-top:60px;">
+<h1><%= user.username %></h1>
+<hr>
+  <div class="row">
+    <div class="col-sm-3 containernew" style=" border-right: 1px solid #e6e9ef;">
+      <hr>
+      <center><h4>Introduction</h4></center>
+      <hr>
+      <div class="row">
+        <span style="float:left;color:red;">Email :</span> <span style="float:left;" class="glyphicon glyphicon-envelope"></span><span style="float:right;">
+        <%= user.email %>
+       </span>
+     </div>
+     <br>
+     <div class="row">
+      <span style="float:left;color:red;">Mobile no  :</span> <span style="float:left;" class="glyphicon glyphicon-earphone"></span><span style="float:right;">
+       <%= user.phone %>
+     </span>
+   </div>
+   <br>
+   <div class="row">
+    <span style="float:left;color:red;">DOB  :</span> <span style="float:left;" class="glyphicon glyphicon-calendar"></span><span style="float:right;">
+     <%= user.dob %>
+   </span>
+   </div>
+      </div>
+      <div class="col-sm-9 scroll">
+        <% @posts=Post.where(user_id:user.id) %>
+        <% @posts.each do |post|  %>
+        <div class="container1">
+      <h4>  <%= post.title %></h4>
+        <hr>
+        <p><%= post.message %></p>
+      </div>
+      <br>
+        <% end %>
+
+      </div>
+
+        </div>
+      </div>

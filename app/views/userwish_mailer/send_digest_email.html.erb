@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <% if @matter=="birthday" %>
+  <center>  <h1>Happy birthday</h1></center>
+    <p>
+      As you add a new year to your life,
+      behind you are your past, setbacks,
+      mistakes;
+    </p>
+      <br>
+      <p>
+        Today marks fresh beginning for you;
+        new life to explore, to exploit and to conquer;
+        may you be lifted to victory.
+      </p>
+      <p>
+      You are made special. We count your blessings and
+      the size of your pursuit, the might of your courage
+      and the beauty of your new life. <br>
+
+    </p>
+    <img src="bday_wish.jpg"/>
+    <h5>Once again ,Happy birthday</h5>
+    <% elsif @matter=="marryanni" %>
+    <center> <h1> Happy Married Life</h1></center>
+    <p>
+      Success doesn’t always come in the form of pay checks and awards.
+       It also lies in smiles
+      that are a result of happy relationships and experiencing
+       the little pleasures of life.
+    </p>
+    <br>
+    <p>
+      Your dreams, ambitions and hopes for the future may not be always the same. But the beauty
+       of your marriage is that you both live to make each others’ dreams come true.
+</p>
+    <br>
+    <img src="mary_wish.jpg"/>
+    <br>
+    <p>Once again, Happy anniversary !!!</p>
+    <% else %>
+    <center>  <h1>Happy Work anniversary</h1></center>
+    <p>The whole team is grateful for your services of <% if @years==0%> <%= @month %> months<%else%><%= @years %> years<% end %>
+      Never let yourself down in your life and continue with your hard work.
+     So thank you and happy anniversary!
+   </p>
+   <img src="work_wish"/>
+   <br>
+     <p>Once again, Happy anniversary !!!</p>
+    <% end %>
+
+    <br>
+    <p>
+      Here is the platform for you to log in and share your memories with us.
+    </p>
+    <a href="http://localhost:5000/pages/posts">Click here</a>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

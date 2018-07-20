@@ -1,0 +1,26 @@
+<% if logged_in? %>
+<div id="show" style="margin-top:60px;">
+<% @posts.each do |post| %>
+<div class="container1 ">
+  <% user = User.find(post.user_id) %>
+<h3>  <%= link_to user.username,posts_userposts_path(user:user.username) %></p></h3>
+<small>Posted at <%=post.created_at%></small>
+  <hr>
+  <span style="font-size:25px;font-weight:400;"><%= post.title %></span>
+  <h4>Message:</h4>
+  <p style="font-size:15px;"><%= post.message %></p>
+  <hr>
+
+  <center><p id="g">()</p></center>
+</div>
+<br>
+
+<% end %>
+</div>
+<% else %>
+<div class="container1" style="margin-top:80px;">
+  <p>You are not an authenticated person.Please  Login to view this page . </p>
+
+ <%= link_to "Login here",login_path %>
+</div>
+<% end %>

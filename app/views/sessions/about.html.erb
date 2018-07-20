@@ -1,0 +1,91 @@
+<div style="margin:70px;">
+  <center><h1 style="color:#133670;font-weight:bolder;">About <%= current_user.username %></h1></center>
+
+  <br>
+
+  <div class="container1 scroll">
+    <div class="container1">
+      <span class="glyphicon glyphicon-envelope"></span>
+      <h4>Email Address :</h4>
+      <hr>
+      <span id="1b"><%=current_user.email%></span>
+      <button id="1" style="float:right;" class="change glyphicon glyphicon-edit"></button>
+      <div><%=  text_field_tag(:email,value=current_user.email,{:style=>" display:none;width:50%;padding:0.5em;",:id=>"1a"}) %>
+      <button name="email"  id="1c" style="float:right;display:none;" title="Save" class="glyphicon glyphicon-save save"></button>
+      </div>
+    </div>
+    <br>
+    <div class="container1">
+      <span class="glyphicon glyphicon-earphone"></span>
+      <h4>Phone number</h4><hr>
+      <span id="2b"><%=current_user.phone%></span>
+      <button id="2" style="float:right;" class="change glyphicon glyphicon-edit"></button>
+      <div><%= text_field_tag(:phone,value=current_user.phone,{:style=>" display:none;width:50%;padding:0.5em;",:id=>"2a"}) %>
+        <button  name="phone" id="2c" style="float:right;display:none;" title="Save" class="glyphicon glyphicon-save save"></button>
+      </div>
+    </div>
+    <br>
+    <div class="container1">
+      <span class="glyphicon glyphicon-calendar" ></span>
+      <h4>Date of Birth :</h4><hr>
+      <span id="3b"><%=current_user.dob%></span>
+      <button id="3" style="float:right;" class="change glyphicon glyphicon-edit"></button>
+      <div><%= date_field_tag(:dob,current_user.dob,{:style=>" display:none;width:50%;",:id=>"3a"}) %>
+        <button name="dob"  id="3c" style="float:right;display:none;" title="Save"class="glyphicon glyphicon-save save"></button>
+      </div>
+    </div>
+  </br>
+  <div class="container1">
+    <span class="glyphicon glyphicon-calendar" ></span>
+    <h4>Date of Joining :</h4><hr>
+    <span id="7b"><%=current_user.doj%></span>
+    <button id="7" style="float:right;" class="change glyphicon glyphicon-edit"></button>
+    <div><%= date_field_tag(:doj,current_user.dob,{:style=>" display:none;width:50%;",:id=>"7a"}) %>
+      <button name="dob"  id="7c" style="float:right;display:none;" title="Save"class="glyphicon glyphicon-save save"></button>
+    </div>
+  </div>
+  <div id="45"class="container1">
+    <% if current_user.dom==nil %>
+    <span class="glyphicon glyphicon-heart"></span>
+    <h4>Marital Status :</h4><hr>
+    <span id="4b">Single</span>
+    <button id="4"style="float:right;" class="change glyphicon glyphicon-edit"></button>
+    <% else %>
+    <span class="glyphicon glyphicon-heart"></span>
+    <h4>Marital Status :</h4><hr>
+    <span id="5b">Married</span>
+    <button id="5"style="float:right;" class="change glyphicon glyphicon-edit"></button>
+    <br>
+    <h4>Date of Marriage :</h4><hr>
+    <span id="6b"><%=current_user.dom%></span>
+    <button id="6" style="float:right;" class="change glyphicon glyphicon-edit"></button>
+    <%= date_field_tag(:dom,value=current_user.dom,{:style=>"display:none;width:50%;",:id=>"6a"}) %>
+    <button  name="dom"id="6c" style="float:right;display:none;" title="Save" class="glyphicon glyphicon-save save"></button>
+    <% end %>
+  </div>
+
+  <div id="4d"class="container1" style="display:none;">
+
+    <span class="glyphicon glyphicon-heart"></span><h4>Marital Status :</h4><hr>
+    <% if current_user.dom==nil %>
+    <%=radio_button_tag "status","single",true, {:class=>" radio ", :id=>"single",checked:true,onclick:"addField()"}%>Single<br>
+    <%=radio_button_tag "status","married",false, {:class=>" radio", :id=>"married",checked:false,onclick:"addField1()"}%>Married
+      <button name="status" id="4c" style="float:right;display:none;" title="Save" class="change glyphicon glyphicon-save save"></button>
+      <% else %>
+      <%=radio_button_tag "status","single",true, {:class=>" radio ", :id=>"single",checked:false,onclick:"addField()"}%>Single<br>
+      <%=radio_button_tag "status","married",false, {:class=>" radio", :id=>"married",checked:true,onclick:"addField1()"}%>Married
+        <button name="status"id="4c" style="float:right;display:none;" title="Save" class="glyphicon glyphicon-save save"></button>
+          <% end %>
+  </div>
+  <div id="dm" class="container1 " style="display:none;">
+    <span class="glyphicon glyphicon-calendar" ></span>
+    <h4>Date of  Marriage :</h4><hr>
+    <% if current_user.dom %>
+    <%= date_field_tag(:dom,current_user.dom ,{:style=>"width:50%;"})%>
+    <% else %>
+    <%=  date_field_tag(:dom,Date.today ,{:style=>"width:50%;" })%>
+    <% end %>
+  </div>
+  <br>
+
+</div>

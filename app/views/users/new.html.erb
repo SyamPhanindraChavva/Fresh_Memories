@@ -1,0 +1,75 @@
+
+<br>
+  <center><h1 style="color:black;font-weight:bolder;">SignUp here</h1></center>
+
+  <br>
+  <div class="container1">
+    <br>
+    <div class="row">
+      <div class="col-sm-6">
+        <center><h1>Fresh Memorywaves</h1></center>
+        <br>
+        <center><q style="font-size:40px; z-index:-100px;opacity:.5;font-style:italic;">(Sometimes ,<br> you will never know the value of a moment until it becomes a memory )</q></center>
+    <br>
+    <center><h1 >Share your memories with us</h1></center>
+    <center><p id="g">()</p></center>
+  </div>
+
+      <div style="border-left:solid 1px black;"class="col-sm-6 scroll">
+  <%= form_for @user do |f| %>
+
+    <div class="form-group">
+      <label>User Name</label><br>
+      <%= text_field_tag(:username,"",{:required => true})%>
+    </div>
+    <div class="form-group">
+      <label>Email id</label><br>
+      <%= email_field_tag(:email,"",{:required => true})%>
+    </div>
+    <div class="form-group">
+      <label>Phone number</label><br>
+      <%= phone_field_tag(:phone,"",{:required => true,:pattern=>"[789][0-9]{9}"})%>
+    </div>
+    <div class="form-group">
+      <label>Gender</label><br>
+      <br>
+      <%=radio_button_tag "gender","Male",true, {:class=>" radio ", :id=>"male",checked:true}%>Male
+      <%=radio_button_tag "gender","Female",false, {:class=>" radio", :id=>"female",checked:false}%>Female
+
+    </div>
+    <div class="form-group">
+      <label>Date of Birth</label>
+<br>
+      <%= date_field_tag(:dob, Date.today,{:required => true})%>
+    </div>
+   <div class="form-group">
+     <label>Marital Status</label>
+     <br>
+
+     <%=radio_button_tag "status","single",true, {:class=>" radio ", :id=>"single",checked:true,onclick:"addField()"}%>Single
+     <%=radio_button_tag "status","married",false, {:class=>" radio", :id=>"married",checked:false,onclick:"addField1()"}%>Married
+
+   </div>
+
+    <div id="dm" class="form-group " style="display:none;">
+      <label>Date of  Marriage</label>
+      <br>
+      <%= date_field_tag(:dom, Date.today,{:required => true})%>
+    </div>
+    <div class="form-group">
+      <label>Date of  Joining</label>
+      <br>
+      <%= date_field_tag(:doj, Date.today,{:required => true})%>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPass">Password</label><br>
+      <%= password_field_tag(:password,"",{:required => true})%>
+
+</div>
+  <center>
+    <%= submit_tag("Submit",:class=>"btn btn-success") %>
+  </center>
+  <% end %>
+</div>
+</div>
+</div>
