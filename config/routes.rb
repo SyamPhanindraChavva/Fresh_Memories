@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   get 'sessions/about','sessions#about'
   get 'sessions/logout','sessions#destroy'
   post 'sessions/update',to:'sessions#update'
+  get 'pages/posts/:link',to:'pages#posts'
   get 'pages/posts',to:'pages#posts'
+  post '/comment',to:'pages#comment'
   resources :users
   resources :posts
 end

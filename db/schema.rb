@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180718174111) do
+ActiveRecord::Schema.define(version: 20180722101907) do
 
   create_table "posts", force: :cascade do |t|
     t.text     "message"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20180718174111) do
     t.date   "doj"
     t.string "password_digest"
     t.string "gender"
+    t.text   "link"
   end
 
 end

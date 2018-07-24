@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 
   end
   def showall
-@posts=Post.all
+@posts=Post.order("id DESC")
 @user=User.new
   end
   def destroy

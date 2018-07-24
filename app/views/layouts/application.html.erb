@@ -4,7 +4,10 @@
     <title>LearningApp</title>
     <%= csrf_meta_tags %>
 
+    <%= javascript_include_tag 'emoji', 'data-turbolinks-track': 'reload' %>
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -48,5 +51,6 @@
     </ul>
     <%end%>
     <%= yield %>
+
   </body>
 </html>

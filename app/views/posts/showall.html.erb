@@ -1,26 +1,58 @@
 <% if logged_in? %>
-<div id="show" style="margin-top:60px;">
-<% @posts.each do |post| %>
-<div class="container1 ">
-  <% user = User.find(post.user_id) %>
-<h3>  <%= link_to user.username,posts_userposts_path(user:user.username) %></p></h3>
-<small>Posted at <%=post.created_at%></small>
-  <hr>
-  <span style="font-size:25px;font-weight:400;"><%= post.title %></span>
-  <h4>Message:</h4>
-  <p style="font-size:15px;"><%= post.message %></p>
-  <hr>
+  <div id="show" style="margin-top:60px;">
+      <% @posts.each do |post| %>
+      <div class="container1 ">
+        <div class="row">
+          <div class="col-sm-6">
+          <% user = User.find(post.user_id) %>
 
-  <center><p id="g">()</p></center>
-</div>
-<br>
+          <h3 style="float:left;clear:both;">  <%= link_to user.username,posts_userposts_path(user:user.username) %></h3>
+          <br>
+          <small style="float:left;clear:both;">Posted at <%=post.created_at%></small>
+        </div>
+        <% if post.user_id==current_user.id%>
+        <div class="col-sm-6">
+          <div style="float:right" class="dropdown">
+    <button style="padding:0;background:none;border:none;" class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+    <b><span >....</span></b></button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+      <li role="presentation"><%=link_to "Edit",pages_posts_path(link:post.id) ,{:role=>"menuitem",:tabindex=>"-1"} %></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-save"></span>Save</a></li>
+    </ul>
+  </div>
+        </div>
+        <% end %>
+      </div>
 
-<% end %>
-</div>
+
+          <hr>
+
+          <span style="font-size:25px;font-weight:400;"><%= post.title %></span>
+          <h4>Message:</h4>
+
+          <% if (post.message).length <101 %>
+        <p id="<%=post.id%>a" style="font-size:15px;"><%=post.message%></p>
+        <% else %>
+        <p id="<%=post.id%>b" style="font-size:15px"><%=truncate(post.message, :length => 100)%><button id="<%=post.id%>" class="btn-link more">Show more</button></p>
+        <% end %>
+        <div  style="display:none"id="<%=post.id%>c">
+        <p style="font-size:15px"><%=post.message%>
+        <button id="<%=post.id%>" class="btn-link less">Show less</button></p>
+      </div>
+          <hr>
+          <div>
+          <button class="but-hov"  style="padding: 5px;float:left;width:50%;"><span class="glyphicon glyphicon-thumbs-up"></span> Like</button>
+          <button class="but-hov" style="float:right;width:50%;"><span class="glyphicon glyphicon-comment"></span> Comment</button>
+          </div>
+          <br>
+      </div>
+
+      <br>
+      <% end %>
+  </div>
 <% else %>
 <div class="container1" style="margin-top:80px;">
   <p>You are not an authenticated person.Please  Login to view this page . </p>
-
- <%= link_to "Login here",login_path %>
+  <%= link_to "Login here",login_path %>
 </div>
 <% end %>

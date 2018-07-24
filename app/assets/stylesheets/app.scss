@@ -18,6 +18,15 @@ background: url('b.jpg') no-repeat center center fixed;
     height: 100%;
     overflow: scroll;
 }
+.but-hov{
+  padding: 0;
+border: none;
+background: none;
+}
+.but-hov:hover{
+  background-color: #f7f8f9;
+  border-radius: 5%;
+}
 .centered {
     position: absolute;
     top: 50%;

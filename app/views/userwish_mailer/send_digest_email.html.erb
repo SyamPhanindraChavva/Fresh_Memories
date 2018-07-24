@@ -3,61 +3,158 @@
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
-  <body>
-    <% if @matter=="birthday" %>
-  <center>  <h1>Happy birthday</h1></center>
-    <p>
-      As you add a new year to your life,
+  <body style="
+  /* fallback */
+
+  /* Opera couldn't do radial gradients, then at some point they started supporting the -webkit- syntax, how it kinda does but it's kinda broken (doesn't do sizing) */
+">
+
+  <div style="border-left: 30px solid #FF5F97;border-right: 30px solid #FF5F97;">
+    <% if @birthday==1 %>
+  <center><h1 style="text-align: center;
+vertical-align: middle;
+height: 90px;
+line-height: 90px; background-color: #FF5F97;
+background-image: url(images/radial_bg.png);
+background-position: center center;
+background-repeat: no-repeat;
+
+/* Safari 4-5, Chrome 1-9 */
+/* Can't specify a percentage size? Laaaaaame. */
+background: -webkit-gradient(radial, center center, 0, center center, 460, from(#1a82f7), to(#2F2727));
+
+/* Safari 5.1+, Chrome 10+ */
+background: -webkit-radial-gradient(circle, #FFCE00, #FF5F97);
+
+/* Firefox 3.6+ */
+background: -moz-radial-gradient(circle, #FFCE00, #FF5F97);
+
+/* IE 10 */
+background: -ms-radial-gradient(circle, #FFCE00, #FF5F97);
+">Happy birthday</h1></center>
+  <center>  <p>  As you add a new year to your life,
       behind you are your past, setbacks,
       mistakes;
     </p>
       <br>
       <p>
-        Today marks fresh beginning for you;
-        new life to explore, to exploit and to conquer;
+        Today marks fresh beginning for you;<br>
+        new life to explore, to exploit and to conquer;<br>
         may you be lifted to victory.
       </p>
       <p>
-      You are made special. We count your blessings and
-      the size of your pursuit, the might of your courage
+      You are made special. We count your blessings and<br>
+      the size of your pursuit, the might of your courage<br>
       and the beauty of your new life. <br>
 
     </p>
-    <img src="bday_wish.jpg"/>
+
     <h5>Once again ,Happy birthday</h5>
-    <% elsif @matter=="marryanni" %>
-    <center> <h1> Happy Married Life</h1></center>
-    <p>
-      Success doesn’t always come in the form of pay checks and awards.
-       It also lies in smiles
-      that are a result of happy relationships and experiencing
-       the little pleasures of life.
+  </center>
+  <br>
+  <% end %>
+    <% if @marrianni==1 %>
+    <center>  <h1 style="text-align: center;
+  vertical-align: middle;
+  height: 90px;
+  line-height: 90px; background-color: #FF5F97;
+  background-image: url(images/radial_bg.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  /* Safari 4-5, Chrome 1-9 */
+  /* Can't specify a percentage size? Laaaaaame. */
+  background: -webkit-gradient(radial, center center, 0, center center, 460, from(#1a82f7), to(#2F2727));
+
+  /* Safari 5.1+, Chrome 10+ */
+  background: -webkit-radial-gradient(circle, #FFCE00, #FF5F97);
+
+  /* Firefox 3.6+ */
+  background: -moz-radial-gradient(circle, #FFCE00, #FF5F97);
+
+  /* IE 10 */
+  background: -ms-radial-gradient(circle, #FFCE00, #FF5F97);
+  "> Happy Married Life</h1></center>
+  <center>  <p>
+      Success doesn’t always come in the form of pay checks and awards.<br>
+       It also lies in smiles<br>
+      that are a result of happy relationships and experiencing<br>
+       the little pleasures of life.<br>
     </p>
     <br>
     <p>
-      Your dreams, ambitions and hopes for the future may not be always the same. But the beauty
-       of your marriage is that you both live to make each others’ dreams come true.
+      Your dreams, ambitions and hopes for the future<br> may not be always the same. But the beauty<br>
+       of your marriage is that you both<br> live to make each others’ dreams come true.
 </p>
     <br>
-    <img src="mary_wish.jpg"/>
     <br>
     <p>Once again, Happy anniversary !!!</p>
-    <% else %>
-    <center>  <h1>Happy Work anniversary</h1></center>
+  </center>
+  <br>
+  <% end %>
+    <% if @workanni==1 %>
+    <center >  <h1 style="text-align: center;
+  vertical-align: middle;
+  height: 90px;
+  line-height: 90px; background-color: #FF5F97;
+  background-image: url(images/radial_bg.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  /* Safari 4-5, Chrome 1-9 */
+  /* Can't specify a percentage size? Laaaaaame. */
+  background: -webkit-gradient(radial, center center, 0, center center, 460, from(#1a82f7), to(#2F2727));
+
+  /* Safari 5.1+, Chrome 10+ */
+  background: -webkit-radial-gradient(circle, #FFCE00, #FF5F97);
+
+  /* Firefox 3.6+ */
+  background: -moz-radial-gradient(circle, #FFCE00, #FF5F97);
+
+  /* IE 10 */
+  background: -ms-radial-gradient(circle, #FFCE00, #FF5F97);
+  "> Happy Work anniversary</h1></center>
+<center >
     <p>The whole team is grateful for your services of <% if @years==0%> <%= @month %> months<%else%><%= @years %> years<% end %>
-      Never let yourself down in your life and continue with your hard work.
+      <br>Never let yourself down in your life and continue with your hard work.<br>
      So thank you and happy anniversary!
    </p>
-   <img src="work_wish"/>
    <br>
      <p>Once again, Happy anniversary !!!</p>
+   </center>
+
     <% end %>
 
     <br>
-    <p>
+<b
+>  <center>  <p>
       Here is the platform for you to log in and share your memories with us.
     </p>
-    <a href="http://localhost:5000/pages/posts">Click here</a>
-    <p>Thanks for joining and have a great day!</p>
+    <%=link_to  "Click here to express your feelings","http://localhost:5000/pages/posts"+"/"+ @scrt %>
+    <p></p>
+  </center>
+  </b>
+
+  <center>  <h3 style="text-align: center;
+vertical-align: middle;
+height: 45px;
+line-height: 45px; background-color: #FF5F97;
+background-image: url(images/radial_bg.png);
+background-position: center center;
+background-repeat: no-repeat;
+
+/* Safari 4-5, Chrome 1-9 */
+/* Can't specify a percentage size? Laaaaaame. */
+background: -webkit-gradient(radial, center center, 0, center center, 460, from(#1a82f7), to(#2F2727));
+
+/* Safari 5.1+, Chrome 10+ */
+background: -webkit-radial-gradient(circle, #FFCE00, #FF5F97);
+
+/* Firefox 3.6+ */
+background: -moz-radial-gradient(circle, #FFCE00, #FF5F97);
+
+/* IE 10 */
+background: -ms-radial-gradient(circle, #FFCE00, #FF5F97);
+">Thanks for joining and have a great day!</h3></center></div>
   </body>
 </html>
