@@ -27,14 +27,21 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-              <li class="active"><%=link_to "Posts",posts_showall_path%></li>
-
+              <li ><%=link_to "Feeds",posts_showall_path%></li>
+              <li><%=link_to "New Post",pages_posts_path%></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>  <%= link_to current_user.username,sessions_about_path%></li>
-                <li> <%= link_to "",sessions_logout_path,{:class=>"glyphicon glyphicon-off "} %>
 
+
+                <li>  <%= link_to current_user.username,sessions_about_path%></li>
+
+                  <li style="margin:0px;"><i><%=image_tag( rails_blob_url(current_user.avatar),
+                {:class=>"img-circle img-responsive",:style=>"width:50px;height:50px;"})%></i></li>
+
+                <li> <%= link_to "",sessions_logout_path,{:class=>"glyphicon glyphicon-off "} %></li>
+
+                </ul>
         <% else %>
         <div class="navbar-header">
           <%= link_to 'Fresh Memorywaves',root_path,{ :class=>"navbar-brand" } %>

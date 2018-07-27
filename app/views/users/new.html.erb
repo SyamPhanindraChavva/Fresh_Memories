@@ -16,7 +16,7 @@
   </div>
 
       <div style="border-left:solid 1px black;"class="col-sm-6 scroll">
-  <%= form_for @user do |f| %>
+  <%= form_for(@user, :html => {multipart: true}) do |f| %>
 
     <div class="form-group">
       <label>User Name</label><br>
@@ -66,6 +66,13 @@
       <%= password_field_tag(:password,"",{:required => true})%>
 
 </div>
+<div class="form-group">
+  <label for="avatar">ProfileImage</label><br>
+
+<%= file_field_tag(:avatar,{:required => true}) %>
+
+</div>
+
   <center>
     <%= submit_tag("Submit",:class=>"btn btn-success") %>
   </center>

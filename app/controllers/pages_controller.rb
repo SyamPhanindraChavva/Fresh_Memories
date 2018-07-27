@@ -30,7 +30,14 @@ end
       end
     end
   end
+  def delete
+    l=Post.find(params[:id])
+    l.destroy
+    puts "Haajnaj"
+    redirect_to posts_showall_path
+  end
   def comment
+    puts "hai"
     if @update==true
     l=Post.find(@postid)
     l.title=params[:titl]
@@ -39,6 +46,7 @@ end
     l.save
   redirect_to posts_showall_path
   else
+    puts "Inside"
     l=Post.new(title:params[:titl],
     message:params[:content],user_id:session[:user_id])
     l.save

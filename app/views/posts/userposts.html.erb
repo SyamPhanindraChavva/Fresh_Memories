@@ -8,6 +8,18 @@
       <center><h4>Introduction</h4></center>
       <hr>
       <div class="row">
+        <% if rails_blob_url(user.avatar).nil?%>
+          <% if user.gender=="female" %>
+          <%= image_tag( "def_girl.png",{:class=>"img-thumbnail img-responsive",:style=>"width:90%;height:40%;"})%>
+         <% else %>
+         <%= image_tag("def_boy.jpg",{:class=>"img-thumbnail img-responsive",:style=>"width:90%;height:40%;"})%>
+         <% end %>
+         <% else %>
+        <%= image_tag(rails_blob_url(user.avatar),{:class=>"img-thumbnail img-responsive",:style=>"width:90%;height:40%;"})%>
+        <% end %>
+      </div>
+      <br>
+      <div class="row">
         <span style="float:left;color:red;">Email :</span> <span style="float:left;" class="glyphicon glyphicon-envelope"></span><span style="float:right;">
         <%= user.email %>
        </span>
@@ -26,16 +38,23 @@
    </div>
       </div>
       <div class="col-sm-9 scroll">
+
         <% @posts=Post.where(user_id:user.id) %>
+        
+        <% if @posts!=nil %>
         <% @posts.each do |post|  %>
         <div class="container1">
-      <h4>  <%= post.title %></h4>
-        <hr>
-        <p><%= post.message %></p>
-      </div>
+          <h4>  <%= post.title %></h4>
+          <hr>
+          <p><%= post.message %></p>
+        </div>
       <br>
         <% end %>
-
+        <% else %>
+        <div class="container1">
+          <center>No posts yet</center>
+        </div>
+        <% end %>
       </div>
 
         </div>

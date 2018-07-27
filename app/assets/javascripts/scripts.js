@@ -19,8 +19,27 @@ function addField() {
                           $('#'+$(this).attr("id")+"b").css('display','none');
                           $('#'+$(this).attr("id")).css('display','none');}
                         });
+                        $(document).on("click",".comment",function(){
+
+                          $("#"+$(this).attr("id")+"-sec").css('display','block');
+                        });
+
+                        $(document).on("keyup","#comtext",function(event){
+                          if(event.keyCode==13)
+                          {
+                            var postid=$(this).attr("name");
+                             var a=$(this).val();
+                             $.ajax({
+                             data:{post_id:postid,value:a},
+                             method:'POST',
+                             url:'/posts/usercomment'
+                             }).then(function(data){
+                             console.log(data);
+                             })
+                          }
+                        });
                         $(document).on("click",".more",function(){
-                          
+
                           $('#'+$(this).attr("id")+'b').css('display','none');
                           $('#'+$(this).attr("id")+'c').css('display','inline');
                         });
