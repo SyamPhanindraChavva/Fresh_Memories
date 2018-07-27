@@ -1,26 +1,118 @@
 <% if logged_in? %>
-<div id="show" style="margin-top:60px;">
-<% @posts.each do |post| %>
-<div class="container1 ">
-  <% user = User.find(post.user_id) %>
-<h3>  <%= link_to user.username,posts_userposts_path(user:user.username) %></p></h3>
-<small>Posted at <%=post.created_at%></small>
-  <hr>
-  <span style="font-size:25px;font-weight:400;"><%= post.title %></span>
-  <h4>Message:</h4>
-  <p style="font-size:15px;"><%= post.message %></p>
-  <hr>
+  <div id="show" style="margin-top:60px;">
+    <div class="container1">
+  <span>  <%= image_tag( rails_blob_url(current_user.avatar),{:class=>"img-circle img-responsive",:style=>"width:120px;height:120px;"})  if !rails_blob_url(current_user.avatar).nil? %>
+    </span>  <span style="font-size:20px;color:red;font-weight:bold;">Welcome, <%=current_user.username%></span>
+    <hr>
+      <%= form_tag("/comment", method:"post") do %>
 
-  <center><p id="g">()</p></center>
-</div>
-<br>
+      <%= text_field_tag(:titl,nil,{:placeholder=>"Your post's title goes here",:style=>"border:none;"})%>
+<hr>
+          <%= text_area_tag(:content,nil,{:rows=>4,:cols=>80,:placeholder=>"Write something here..",:style=>"border:none;box-shadow:none;"} ) %>
 
-<% end %>
+        <%= submit_tag("Submit",:class=>"btn glyphicon glyphicon-send") %>
+      </center>
+      <% end %>
+      <hr>
+
+  </div>
+    <br>
+      <% @posts.each do |post| %>
+      <div class="container1 ">
+        <div class="row">
+          <div class="col-sm-6">
+          <% user = User.find(post.user_id) %>
+
+          <h3 style="float:left;clear:both;"> <%= link_to posts_userposts_path(user:user.username) do%><%= image_tag( rails_blob_url(user.avatar),{:class=>"img-circle img-responsive",:style=>"width:15%;height:10%;"})if !rails_blob_url(user.avatar).nil?%><%=user.username%>  <% end %></h3>
+          <br>
+          <small style="float:left;clear:both;">Posted at <%=post.created_at%></small>
+        </div>
+        <% if post.user_id==current_user.id%>
+        <div class="col-sm-6">
+          <div style="float:right" class="dropdown">
+    <button style="padding:0;background:none;border:none;" class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+    <b><span >....</span></b></button>
+
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+
+      <li role="presentation"><%=link_to "Edit",pages_posts_path(link:post.id) ,{:role=>"menuitem",:tabindex=>"-1"}%></li>
+      <li role="presentation"><%=link_to "Delete",pages_delete_path(id:post.id) ,{:role=>"menuitem",:tabindex=>"-1"}%></li>
+    </ul>
+  </div>
+        </div>
+        <% end %>
+      </div>
+
+
+          <hr>
+
+          <span style="font-size:25px;font-weight:400;"><%= post.title %></span>
+          <h4>Message:</h4>
+
+          <% if (post.message).length <101 %>
+        <p id="<%=post.id%>a" style="font-size:15px;"><%=post.message%></p>
+        <% else %>
+        <p id="<%=post.id%>b" style="font-size:15px"><%=truncate(post.message, :length => 100)%><button id="<%=post.id%>" class="btn-link more">Show more</button></p>
+        <% end %>
+        <div  style="display:none"id="<%=post.id%>c">
+        <p style="font-size:15px"><%=post.message%>
+        <button id="<%=post.id%>" class="btn-link less">Show less</button></p>
+      </div>
+      <span class="glyphicon glyphicon-thumbs-up"></span>
+      <sup><%= post.likes.count %></sup>
+          <hr>
+          <div>
+            <% if Like.find_by_user_id_and_post_id(current_user.id,post.id)==nil %>
+            <button class="but-hov" style="padding: 5px;float:left;width:50%;font-size: 20px;">
+              <%= link_to posts_like_path(post.id), method: :post do %>
+            <span style="font-size: 20px;font-weight:bold;" class="glyphicon glyphicon-thumbs-up">Like</span>
+            <% end %>
+          </button>
+            <% else %>
+            <button class="but-hov" style="padding: 5px;float:left;width:50%;font-size: 20px;">
+            <%= link_to posts_unlike_path(post.id), method: :post do %>
+            <span style="color:#e21b43;font-size: 20px;font-weight:bold;" class="glyphicon glyphicon-thumbs-up"></span>Like
+            <% end %>
+          </button>
+            <% end %>
+          <button id="<%=post.id%>comment" class="but-hov comment" style="padding: 5px;float:right;width:50%;font-size: 20px;color:#337ab7;"><a style="text-decoration:none;" class="glyphicon glyphicon-comment"></a> Comment</button>
+          <hr></div>
+
+          <br>
+          <div id="<%=post.id%>comment-sec" style="display:none;">
+            <hr>
+          <div class="row">
+            <div class="col-sm-2 " >
+              <i><%=image_tag( rails_blob_url(current_user.avatar),
+          {:class=>"img-circle img-responsive",:style=>"width:50px;height:50px;"})%>
+        </i>
+         </div>
+          <div class="col-sm-10" >
+            <%= text_field_tag(:comment,"",{:required => true,:style=>"border-radius:25px;
+  ",:placeholder=>"Write a comment...",:autofocus=>"true",:id=>"comtext",:name=>post.id,:class=>"col-sm-11"})%>
+        </div>
 </div>
+  <br>
+  <br>
+  <% comment=post.comments.last(3) %>
+  <%comment.each do |c|%>
+<span style="margin-bottom: 20px;border-radius:25px;background-color:#eff3f4;line-height:1.2; "><%=link_to c.user.username,posts_userposts_path(user:c.user.username) ,{:style=>""}%>
+<span style="padding:10px;">
+<%=c.description%></span>
+</span>
+  <sub><%=distance_of_time_in_words_to_now(c.created_at)%></sub>
+  <br>
+  <br>
+  <% end %>
+          </div>
+      </div>
+
+      <br>
+      <% end %>
+  </div>
 <% else %>
 <div class="container1" style="margin-top:80px;">
   <p>You are not an authenticated person.Please  Login to view this page . </p>
-
- <%= link_to "Login here",login_path %>
+  <%= link_to "Login here",login_path %>
 </div>
 <% end %>

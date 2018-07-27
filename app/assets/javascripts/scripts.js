@@ -7,7 +7,6 @@ function addField() {
                             $("#dm").css('display', 'block');
 
                         };
-                        debugger
                         $(document).on("click", ".change", function(){
                           if($(this).attr("id")==4 ||$(this).attr("id")==5)
                               {$('#'+'45').css('display','none');
@@ -20,7 +19,37 @@ function addField() {
                           $('#'+$(this).attr("id")+"b").css('display','none');
                           $('#'+$(this).attr("id")).css('display','none');}
                         });
-                        $('.save').click(function(){
+                        $(document).on("click",".comment",function(){
+
+                          $("#"+$(this).attr("id")+"-sec").css('display','block');
+                        });
+
+                        $(document).on("keyup","#comtext",function(event){
+                          if(event.keyCode==13)
+                          {
+                            var postid=$(this).attr("name");
+                             var a=$(this).val();
+                             $.ajax({
+                             data:{post_id:postid,value:a},
+                             method:'POST',
+                             url:'/posts/usercomment'
+                             }).then(function(data){
+                             console.log(data);
+                             })
+                          }
+                        });
+                        $(document).on("click",".more",function(){
+
+                          $('#'+$(this).attr("id")+'b').css('display','none');
+                          $('#'+$(this).attr("id")+'c').css('display','inline');
+                        });
+                        $(document).on("click",".less",function(){
+
+                          $('#'+$(this).attr("id")+'c').css('display','none');
+                          $('#'+$(this).attr("id")+'b').css('display','inline');
+
+                        });
+                        $(document).on("click",'.save',function(){
                           var aa=$(this).attr("name")
                           alert(aa);var a
                           if(aa=="status")
